@@ -1,5 +1,6 @@
 #include <iostream>
 #include <algorithm>
+#include <queue>
 
 using namespace std;
 
@@ -29,17 +30,30 @@ int main() {
 
     sort(range, range + n);
 
-    int res = 0;
-    max_r[0] = -2e9;
+//    错误代码
+//    int res = 0;
+//    max_r[0] = -2e9;
+//    for (int i = 0; i < n; i++) {
+//        for (int j = 0; j < res; j++) {
+//            if (range[i] > max_r[j]) max_r[j] = range[i].r;
+//        }
+//        res++;
+//        max_r[res] = range[i].r;
+//    }
+//
+//    printf("%d\n", res);
+
+    priority_queue<int, vector<int>, greater<int>> heap;
     for (int i = 0; i < n; i++) {
-        for (int j = 0; j < res; j++) {
-            if (range[i] > max_r[j]) max_r[j] = range[i].r;
+        auto r = range[i];
+        if (heap.empty() || r.l <= heap.top()) heap.push(r.r);
+        else {
+            heap.pop();
+            heap.push(r.r);
         }
-        res++;
-        max_r[res] = range[i].r;
     }
 
-    printf("%d\n", res);
+    printf("%d\n", heap.size());
 
     return 0;
 }
