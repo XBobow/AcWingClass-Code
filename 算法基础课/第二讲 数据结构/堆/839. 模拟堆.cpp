@@ -1,12 +1,12 @@
-#include <bits/stdc++.h>
-#include <string>
+#include <string.h>
 #include <cstdio>
-//#include <iostream>
+#include <iostream>
+
 using namespace std;
 
 const int N = 1e5 + 10;
 
-int n, m, size;
+int n, m, cnt;
 int heap[N], hp[N], ph[N];
 
 //ph指向第k个插入的数在堆的哪个位置，ph指向堆某个位置的数是第几个插入的
@@ -36,10 +36,10 @@ void up(int k) {
 }
 
 void insert(int k, int x) {
-    heap[++size] = x;
-    hp[k] = size;
-    ph[size] = k;
-    up(size);
+    heap[++cnt] = x;
+    hp[k] = si;
+    ph[cnt] = k;
+    up(cnt);
 }
 
 
@@ -58,11 +58,11 @@ int main() {
         } else if (!strcmp(op, "PM")) {
             printf("%d", heap[1]);
         } else if (!strcmp(op, "DM")) {
-            heap[1] = heap[size--];
+            heap[1] = heap[cnt--];
             down(1);
         } else if (!strcmp(op, "DK")) {
             scanf("%d", &k);
-            swap_heap(heap[hp[k]], heap[size--]);
+            swap_heap(heap[hp[k]], heap[cnt--]);
             down(hp[k]);
             up(hp[k]);
         } else {

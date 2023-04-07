@@ -18,14 +18,14 @@ void insert(int x) {
 bool query(int x) {
     int k = (x % N + N) % N;
     for (int i = hs[k]; i != -1; i = ne[i]) {
-        if (e[i] = x) return true;
+        if (e[i] == x) return true;
     }
     return false;
 }
 
 int main() {
 
-    menset(hs, 0x3f, sizeof hs);
+    memset(hs, 0x3f, sizeof hs);
 
     scanf("%d", &n);
 
